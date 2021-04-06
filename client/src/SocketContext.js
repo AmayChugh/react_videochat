@@ -4,7 +4,7 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext();
 
-const socket = io('https://video-chat-app-react.herokuapp.com/');
+const socket = io('https://quiet-hamlet-83239.herokuapp.com/');
 
 const ContextProvider = ({ children }) => {
     const [ stream, setStream] = useState(null);
@@ -52,18 +52,35 @@ const ContextProvider = ({ children }) => {
         connectionRef.current = peer;
 
     }
-    const callUser = (id) => {
-        const peer = new Peer({ initiator: true, trickle: false, stream});
-        peer.on('signal', (data)=>{
-            socket.emit('callUser',{ userToCall: id, signalData: data, from: me, name});
-        });
+    // const callUser = (id) => {
+    //     const peer = new Peer({ initiator: true, trickle: false, stream});
+    //     peer.on('signal', (data)=>{
+    //         socket.emit('callUser',{ userToCall: id, signalData: data, from: me, name});
+    //     });
      
+    //     peer.on('stream', (currentStream) => {
+    //         userVideo.current.srcObject = currentStream;
+    //     });
+     
+    //     socket.on('callAccepted',(signal) =>{
+    //         setCallAccepted(true);
+    //         peer.signal(signal);
+    //     });
+    const callUser = (id) => {
+
+        const peer = new Peer({ initiator: true, trickle: false, stream });
+
+        peer.on('signal', (data) => {
+        socket.emit('callUser', { userToCall: id, signalData: data, from: me, name });
+        });
+
         peer.on('stream', (currentStream) => {
             userVideo.current.srcObject = currentStream;
         });
-     
-        socket.on('callAccepted',(signal) =>{
+
+        socket.on('callAccepted', (signal) => {
             setCallAccepted(true);
+      
             peer.signal(signal);
         });
      
