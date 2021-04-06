@@ -4,7 +4,7 @@
 
 # Project Link: 
 ## Front End:
-amay-videocall-react.netlify.app
+https://amay-videocall.netlify.app/
 
 ## Backend
 https://sheltered-sea-27176.herokuapp.com/
