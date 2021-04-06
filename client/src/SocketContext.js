@@ -4,7 +4,7 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext();
 
-const socket = io('http://localhost:5000');
+const socket = io('https://sheltered-sea-27176.herokuapp.com/');
 
 const ContextProvider = ({ children }) => {
     const [ stream, setStream] = useState(null);
